@@ -1,10 +1,24 @@
 import logging
-from telegram.ext import Updater, CommandHandler , MessageHandler , Filters 
+import telegram
+from telegram.ext import Updater, CommandHandler, MessageHandler , Filters 
+from telegram import  InlineKeyboardButton, InlineKeyboardMarkup
 from  scrape import *
 
-def start(update, context):
+
+bot = telegram.Bot(token="1786157926:AAENP-1fUdw68NzRoV7z2wxJFNgsk0JnY50")
+
+def start(update,context):
     
-    update.message.reply_text(article_name)
+    content = scraperecent()
+
+    for article in content:
+        try:
+            update.message.reply_text(f"{article['image']} {article['name']}, {article['href']}")
+           
+        except:
+            pass
+
+    
 
 def new(update, context):
     update.message.reply_text("Hold on for something new")

@@ -1,30 +1,42 @@
 from bs4 import BeautifulSoup
 import requests
 
-source=requests.get('https://www.thenetnaija.com/videos/tag/Horror').text
 
-soup=BeautifulSoup(source,'lxml')
+def scraperecent():
 
-content_main=soup.find('div',class_="video-files")
+    source=requests.get('https://www.thenetnaija.com/videos/tag/Horror').text
 
+    soup=BeautifulSoup(source,'lxml')
 
-articles =content_main.find_all('article')
+    recent_horror=[]
 
-for article in articles:
-
-     article_image=article.find('div', class_="thumbnail").img['src']
-
-     article_info=article.find('div',class_="info")
-
-     article_link=article_info.h2.a['href']
-
-     article_name=article_info.h2.a.text
-
-    print(article_image)
+    content_main=soup.find('div',class_="video-files")
 
 
-    print(article_link)
+    articles =content_main.find_all('article')
 
-    print(article_name)
+    for article in articles:
 
-    print()
+        
+        try:
+            article_image=article.find('div', class_="thumbnail").img['src']
+
+            article_info=article.find('div',class_="info")
+
+            article_link=article_info.h2.a['href']
+
+            article_name=article_info.h2.a.text
+            
+            recent_horror.append({
+
+               'image':article_image,
+               'href':article_link,
+               'name':article_name
+          })
+
+            
+        except:
+             pass
+    return recent_horror
+
+
