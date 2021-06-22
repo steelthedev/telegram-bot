@@ -8,12 +8,18 @@ from  scrape import *
 bot = telegram.Bot(token="1786157926:AAENP-1fUdw68NzRoV7z2wxJFNgsk0JnY50")
 
 def start(update,context):
-    
+    chat_id = update.effective_chat.id
+
     content = scraperecent()
+
+    messages= ""
 
     for article in content:
         try:
-            update.message.reply_text(f"{article['image']} {article['name']}, {article['href']}")
+
+            messages = f"\n{article['name']}\n{article['href']}"
+            context.bot.send_message(chat_id=chat_id, text=messages)
+            #update.message.reply_text(f"{article['image']} {article['name']}, {article['href']}")
            
         except:
             pass
