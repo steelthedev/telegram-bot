@@ -17,7 +17,7 @@ def scraperecent():
 
     for article in articles:
 
-        
+
         try:
             article_image=article.find('div', class_="thumbnail").img['src']
 
@@ -28,7 +28,7 @@ def scraperecent():
             article_name=article_info.h2.a.text
 
 
-            
+
             recent_horror.append({
 
                'image':article_image,
@@ -36,14 +36,14 @@ def scraperecent():
                'name':article_name
           })
 
-            
+
         except:
              pass
     return recent_horror
 
-def SearchMovie(title):
-    
-  
+def SearchNetnaija(title):
+
+
     url = f"https://www.thenetnaija.com/search?folder=videos&t={title}"
 
 
@@ -72,7 +72,7 @@ def SearchMovie(title):
 
             article_summary = article_info.find("div", class_="excerpt").text
 
-           
+
 
             search_result.append({
 
@@ -88,3 +88,6 @@ def SearchMovie(title):
     return search_result
 
 
+
+
+  
