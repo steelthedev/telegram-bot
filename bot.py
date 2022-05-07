@@ -14,8 +14,8 @@ from datetime import datetime
 import pytz
 import logging
 
-bot_token = os.environ['steelbufferbot_token']
-fauna_secret = os.environ['fauna_secret']
+bot_token = "1786157926:AAENP-1fUdw68NzRoV7z2wxJFNgsk0JnY50" #os.environ['steelbufferbot_token']
+fauna_secret = "fnAEM72bnaACC-Yv5QYKHUyMm4rhRH6hwC5SdBOT" #os.environ['fauna_secret']
 bot = telegram.Bot(token=bot_token)
 fauna_secret = fauna_secret
 client = FaunaClient(secret=fauna_secret)
