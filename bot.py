@@ -141,7 +141,7 @@ dp.add_handler(echo_handler)
 updater.start_webhook(listen="0.0.0.0",
                           port=int(PORT),
                           url_path=bot_token)
-updater.bot.setWebhook('https://yourherokuappname.herokuapp.com/' + TOKEN)
+updater.bot.setWebhook('https://steelbufferbot.herokuapp.com/' + bot_token)
 
 
 updater.idle()
