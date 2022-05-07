@@ -12,6 +12,7 @@ from faunadb.client import FaunaClient
 from telegram import KeyboardButton, ReplyKeyboardMarkup
 from datetime import datetime
 import pytz
+import logging
 
 bot_token = os.environ['steelbufferbot_token']
 fauna_secret = os.environ['fauna_secret']
@@ -19,8 +20,14 @@ bot = telegram.Bot(token=bot_token)
 fauna_secret = fauna_secret
 client = FaunaClient(secret=fauna_secret)
 
+import os
+PORT = int(os.environ.get('PORT', 5000))
 
+#Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
 
+logger = logging.getLogger(__name__)
 
 
 def echo_thread(update, context):
@@ -67,8 +74,6 @@ def start(update,context):
     first_name = update["message"]["chat"]["first_name"]
     username = update["message"]["chat"]["username"]
 
-
-
     try:
           user=client.query(q.get(q.match(q.index("net_naija"), chat_id)))
           client.query(q.update(q.ref(q.collection("buffer_bot"), user["ref"].id()), {"data": {"last_command": "start"}}))
@@ -96,7 +101,12 @@ def search(update, context):
     user = client.query(q.get(q.match(q.index("net_naija"), chat_id)))
     client.query(q.update(q.ref(q.collection("buffer_bot"), user["ref"].id()), {"data": {"last_command": "search"}}))
 
+   
     context.bot.send_message(chat_id=chat_id, text ="Enter the name of your movie")
+
+
+
+
 
 def echo(update, context):
 
@@ -126,6 +136,12 @@ echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
 
 dp.add_handler(echo_handler)
 
-updater.start_polling()
+#updater.start_polling()
+
+updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=bot_token)
+updater.bot.setWebhook('https://yourherokuappname.herokuapp.com/' + TOKEN)
+
 
 updater.idle()
