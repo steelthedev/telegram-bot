@@ -1,0 +1,19 @@
+{
+	"token":"{}",
+     "db":{
+          "host":"localhost",
+          "port":27017,
+          "db_name":"bufferbot"
+     },
+     "messages":{
+          "welcome":"Hello {}, I am SteelBufferBot. Let's walk through netnaija together, check /menu",
+          "menu": "What do you wanna do? \n\n/search - search netnaija for your favorite movies \n/get_recent - get recent movies from netnaija.\n /search_kimoi \n/mute \n/donate",
+          "search":"Enter the name of movie to search",
+          "search_result":"\n {} \n {} \n\n {}",
+          "nkiri_search":"Enter the name to search with nkiri",
+          "kimoi_season":"{}\n https://kimoitv.com/{}"
+
+     }
+
+
+}

@@ -96,12 +96,8 @@ def start(update,context):
 def search(update, context):
 
     chat_id = update.effective_chat.id
-
-
     user = client.query(q.get(q.match(q.index("net_naija"), chat_id)))
     client.query(q.update(q.ref(q.collection("buffer_bot"), user["ref"].id()), {"data": {"last_command": "search"}}))
-
-   
     context.bot.send_message(chat_id=chat_id, text ="Enter the name of your movie")
 
 
@@ -138,10 +134,16 @@ dp.add_handler(echo_handler)
 
 #updater.start_polling()
 
-updater.start_webhook(listen="0.0.0.0",
-                          port=int(PORT),
-                          url_path=bot_token)
-updater.bot.setWebhook('https://steelbufferbot.herokuapp.com/' + bot_token)
+#updater.start_webhook(listen="0.0.0.0",
+                          #port=int(PORT),
+                          #url_path=bot_token)
+#updater.bot.setWebhook('https://ibottt.herokuapp.com/' + bot_token)
 
 
 updater.idle()
+
+
+
+
+
+
